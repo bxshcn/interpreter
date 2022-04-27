@@ -88,6 +88,12 @@ class Scanner {
 			case '*':
 				addToken(STAR);
 				break;
+			case '?':
+				addToken(QUESTION);
+				break;
+			case ':':
+				addToken(COLON);
+				break;
 			case '!':
 				addToken(match('=') ? BANG_EQUAL : BANG);
 				break;
@@ -105,7 +111,7 @@ class Scanner {
 					// A comment goes until the end of the line.
 					while (peek() != '\n' && !isAtEnd())
 						advance();
-				} else if (match('*')) {  // [*]support block comments
+				} else if (match('*')) { // [*]support block comments
 					blockComment();
 				} else {
 					addToken(SLASH);

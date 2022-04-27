@@ -28,4 +28,4 @@ buildNumber.properties
 *.class
 
 # ignore generated file
-Expr.java
+src/main/java/com/craftinginterpreters/lox/Expr.java

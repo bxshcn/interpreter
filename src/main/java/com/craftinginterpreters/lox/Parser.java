@@ -30,11 +30,24 @@ class Parser {
   }
 
   private Expr comma() {
-    Expr expr = equality();
+   // Expr expr = equality();
+    Expr expr = ternary();
     if (match(COMMA)) {
       Token operator = previous();
       Expr right = comma();
       expr = new Expr.Binary(expr, operator, right);
+    }
+    return expr;
+  }
+
+  private Expr ternary() {
+    Expr expr = equality();
+    if (match(QUESTION)) {
+      Token operator = previous();
+      Expr consequence = ternary();
+      advance();  // skip colon
+      Expr alternative = ternary();
+      expr = new Expr.Ternary(expr, operator, consequence, alternative);
     }
     return expr;
   }
